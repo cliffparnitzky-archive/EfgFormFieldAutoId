@@ -41,6 +41,15 @@ $GLOBALS['EFG']['storable_fields'][] = 'autoId';
 /**
  * Adding hooks
  */
-$GLOBALS['TL_HOOKS']['processFormData'][] = array('EfgFormFieldAutoId', 'generateAutoId');
+$GLOBALS['TL_HOOKS']['processEfgFormData'][] = array('EfgFormFieldAutoId', 'generateAutoId');
+$GLOBALS['TL_HOOKS']['loadFormField'][] = array('EfgFormFieldAutoId', 'loadAutoIdField');
+
+/**
+ * Characters for thousands separator
+ */
+$GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR']['point'] = '.';
+$GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR']['comma'] = ',';
+$GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR']['blank'] = ' ';
+$GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR']['quote'] = '\'';
 
 ?>

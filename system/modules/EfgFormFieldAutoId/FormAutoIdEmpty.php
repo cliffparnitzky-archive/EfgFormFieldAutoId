@@ -28,45 +28,22 @@
  */
 
 /**
- * Class FormAutoId
+ * Class FormAutoIdEmpty
  *
- * Form field "autoId".
+ * Empty form field for "autoId".
  * @copyright  Cliff Parnitzky 2012
  * @author     Cliff Parnitzky
  * @package    Controller
  */
-class FormAutoId extends Widget
+class FormAutoIdEmpty extends Widget
 {
-	/**
-	 * Submit user input
-	 * @var boolean
-	 */
-	protected $blnSubmitInput = true; 
-	
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'form_widget';
-	
 	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
 	public function generate()
 	{
-		$spanValue = $this->varValue;
-		if (strlen($this->varValue) == 0 && $this->autoIdShowWhileCreation && strlen($this->autoIdAutoCreationMessage) > 0) {
-			// this record is new and displaying is on
-			$spanValue = $this->autoIdAutoCreationMessage;
-		}
-
-		return sprintf('<span id="ctrl_%s_span" class="text%s">%s</span><input type="hidden" name="%s" value="%s"/>',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$spanValue,
-						$this->strName,
-						specialchars($this->varValue));
+		return '';
 	}
 }
 

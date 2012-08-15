@@ -36,12 +36,97 @@
  */
 class EfgFormFieldAutoId extends Backend
 {
-	public function generateAutoId($arrPost, $arrForm, $arrFiles)
+	/**
+	 * Execute hook 'processEfgFormData' to generate the automatic id before storing the record.
+	 */
+	public function generateAutoId($arrToSave, $arrFiles, $intOldId, $arrForm, $arrLabels)
 	{
-		if ($arrForm['autoIdActive']) {
-			echo $arrForm['autoIdField'];
-			echo $arrForm['autoIdStartValue'];
+		if ($arrForm['autoIdActive'] && $intOldId == 0) {
+			$autoIdFieldName = $arrForm['autoIdField'];
+			$autoId = $arrForm['autoIdStartValue'];
+			
+			$digitGrouping = false;
+			$thousandsSeparator = '';
+			$prefix = '';
+			$objField = $this->Database->prepare("SELECT * FROM tl_form_field WHERE pid = ? AND name = ? AND type = ?")
+						->limit(1)
+						->execute(array($arrForm['id'], $autoIdFieldName, 'autoId'));
+		
+			if ($objField->numRows > 0 && $objField->next()) {
+				$digitGrouping = strlen($objField->autoIdDigitGrouping) > 0;
+				$thousandsSeparator = $GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR'][$objField->autoIdThousandsSeparator];
+				$prefix = $objField->autoIdPrefix;
+				
+				if (strlen($objField->autoIdPrefixAddBlank) > 0) {
+					$prefix .= " ";
+				}
+			}
+			
+			$queryString = "SELECT MAX(fdd.value) AS id FROM tl_formdata_details fdd "
+						 . "JOIN tl_formdata fd ON fd.id = fdd.pid "
+						 . "JOIN tl_form f ON f.title = fd.form "
+						 . "WHERE f.id = ? AND fdd.ff_name = ?";
+						 
+			$lastId = $this->Database->prepare($queryString)
+							->execute(array($arrForm['id'], $autoIdFieldName));
+			
+			if ($lastId->numRows > 0 && $lastId->next() && strlen($lastId->id) > 0) {
+				$autoId = $lastId->id;
+				
+				// remove prefix
+				if (strlen($prefix) > 0) {
+					$autoId = substr($autoId, strlen($prefix), strlen($autoId));
+				}
+				// remove digit grouping
+				if ($digitGrouping && strlen($thousandsSeparator) > 0) {
+					$autoId = str_replace($thousandsSeparator, '', $autoId);
+				}
+				
+				// increment value
+				$autoId = intval($autoId) + 1;
+			}
+				
+			// add digit grouping
+			if ($digitGrouping && strlen($thousandsSeparator) > 0) {
+				// add zeros to the start for consistent chunk length
+				$missingChars = (9 - (floor(strlen($autoId) / 3) *3) - (strlen($autoId) % 3));
+				$missingZeros = "";
+				for ($i = 0; $i < $missingChars; $i++) {
+					$missingZeros .= "0";
+				}
+				$autoId = $missingZeros . $autoId;
+
+				// split the string into consistent chunks of length 3
+				$arrChunks = str_split($autoId, 3);
+				// combine the chunks with adding the thousands separator
+				$autoId = implode($thousandsSeparator, $arrChunks);
+
+				// remove the added zeros
+				$autoId = substr($autoId, $missingChars, strlen($autoId));
+			}
+			
+			// add prefix
+			$autoId = $prefix . $autoId;
+				
+			$arrToSave[$autoIdFieldName] = $autoId;
 		}
+		return $arrToSave;
+	}
+	
+	/**
+	 * Execute hook 'validateFormField' to generate the field.
+	 */
+	public function loadAutoIdField(Widget $objWidget, $strForm, $arrForm)
+	{
+		$this->import("Input");
+		
+		$isEditMode = strlen($this->Input->get("details")) > 0;
+		if ($objWidget instanceof FormAutoId && !$isEditMode) {
+			if (!$objWidget->autoIdShowWhileCreation) {
+				return new FormAutoIdEmpty();
+			}
+		}
+		return $objWidget; 
 	}
 	
 	/**
@@ -53,18 +138,17 @@ class EfgFormFieldAutoId extends Backend
 		$fields = array();
 
 		// Get all 'autoId' form fields which can be used to store the generated id
-		$objFields = $this->Database->prepare("SELECT id,name,label FROM tl_form_field WHERE type = ? AND pid=? ORDER BY name ASC")
+		$objFields = $this->Database->prepare("SELECT name,label FROM tl_form_field WHERE type = ? AND pid=? ORDER BY name ASC")
 							->execute(array('autoId', $this->Input->get('id')));
 
 		while ($objFields->next())
 		{
-			$id = $objFields->id;
 			$name = $objFields->name;
 			$label = $objFields->label;
 
 			if (strlen($name)) {
 				$label = strlen($label) ? $label.' ['.$name.']' : $name;
-				$fields[$id] = $label;
+				$fields[$name] = $label;
 			}
 		}
 

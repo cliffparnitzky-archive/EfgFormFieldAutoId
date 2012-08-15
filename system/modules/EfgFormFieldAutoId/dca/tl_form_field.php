@@ -26,10 +26,76 @@
  * @package    EfgFormFieldAutoId
  * @license    LGPL
  */
- 
-/**
- * Add a palette to tl_form_field
- */
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{expert_legend:hide},class';
+
+// fields
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdDigitGrouping'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdDigitGrouping'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 m12')
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdThousandsSeparator'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'select',
+	'options'                 => array
+	                             (
+								     'point' => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['point'],
+									 'comma' => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['comma'],
+									 'blank' => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['blank'],
+									 'quote' => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['quote']
+	                             ),
+	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdShowWhileCreation'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdShowWhileCreation'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr m12')
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdAutoCreationMessage'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdAutoCreationMessage'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'textarea',
+	'eval'                    => array('rte'=>'tinyMCE', 'allowHtml'=>true, 'tl_class'=>'clr')
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefix'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefix'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50 clr', 'allowHtml'=>true)
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefixAddBlank'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefixAddBlank'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50 m12',)
+);
+
+// Palettes
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdDigitGrouping';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdShowWhileCreation';
+
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{options_legend},autoIdDigitGrouping,autoIdShowWhileCreation,autoIdPrefix,autoIdPrefixAddBlank;{expert_legend:hide},class';
+
+// Subpalettes
+array_insert($GLOBALS['TL_DCA']['tl_form_field']['subpalettes'], count($GLOBALS['TL_DCA']['tl_form_field']['subpalettes']),
+	array('autoIdDigitGrouping' => 'autoIdThousandsSeparator')
+);
+array_insert($GLOBALS['TL_DCA']['tl_form_field']['subpalettes'], count($GLOBALS['TL_DCA']['tl_form_field']['subpalettes']),
+	array('autoIdShowWhileCreation' => 'autoIdAutoCreationMessage')
+);
 
 ?>

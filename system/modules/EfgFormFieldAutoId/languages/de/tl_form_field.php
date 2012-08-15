@@ -32,4 +32,18 @@
  */
 $GLOBALS['TL_LANG']['FFL']['autoId'] = array('Auto Id Feld', 'Ein Feld das automatisch eine Id für jeden Datensatz generiert.');
 
+// fields
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdDigitGrouping']       = array('Zifferngruppierung verwenden', 'Wenn Sie diese Option wählen, wird der Auto Id Wert mit Zifferngruppierung gespeichert (z.B. <i>1.000.512</i>).');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']  = array('Tausendertrennzeichen', 'Wählen Sie das Tausendertrennzeichen, welches Zifferngruppierung verwendet werden soll.');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdShowWhileCreation']   = array('Beim Anlegen eines Datensatzes anzeigen', 'Wenn Sie diese Option wählen, wird das Auto Id Feld im Formular auch angezeigt, wenn ein Datensatz neu angelegt wird (sonst ist es nur beim Bearbeiten sichtbar).');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdAutoCreationMessage'] = array('Meldung über Auto Id Erzeugung', 'Wählen Sie eine Meldung, die beim Anlegen eines Datensatze im Auto Id Feld angezeigt, um den Benutzer über die automitische Erzeugung der zu informieren.');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefix']              = array('Präfix für den Auto Id Wert', 'Wählen Sie einen Text, der dem Auto Id Wert beim Speichern vorangestellt werden soll.');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefixAddBlank']      = array('Leerzeichen nach Präfix einfügen', 'Wenn Sie diese Option wählen, wird zwischen Präfix und Auto Id Wert ein Leerzeichen eingefügt (nur wenn ein Präfix gesetzt ist).');
+
+// options
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['point'] = 'Punkt (.)';
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['comma'] = 'Komma (,)';
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['blank'] = 'Leerzeichen ( )';
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['quote'] = 'Einfaches Anführungszeichen (\')';
+
 ?>
