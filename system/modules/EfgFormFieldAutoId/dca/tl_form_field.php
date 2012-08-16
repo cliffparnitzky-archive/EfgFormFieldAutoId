@@ -73,7 +73,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefix'] = array
 	'exclude'                 => true,
 	'filter'                  => false,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50 clr', 'allowHtml'=>true)
+	'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50 clr')
 );
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefixAddBlank'] = array
 (
