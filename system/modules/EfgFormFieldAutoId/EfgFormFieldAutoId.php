@@ -89,7 +89,7 @@ class EfgFormFieldAutoId extends Backend
 			// add digit grouping
 			if ($digitGrouping && strlen($thousandsSeparator) > 0) {
 				// add zeros to the start for consistent chunk length
-				$missingChars = (9 - (floor(strlen($autoId) / 3) *3) - (strlen($autoId) % 3));
+				$missingChars = (((floor((strlen($autoId) - 1) / 3) * 3) + 3) - (strlen($autoId)));
 				$missingZeros = "";
 				for ($i = 0; $i < $missingChars; $i++) {
 					$missingZeros .= "0";
