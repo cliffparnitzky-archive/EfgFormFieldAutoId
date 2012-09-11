@@ -62,12 +62,14 @@ class EfgFormFieldAutoId extends Backend
 				}
 			}
 			
-			$queryString = "SELECT MAX(fdd.value) AS id FROM tl_formdata_details fdd "
+			$queryString = "SELECT fdd.value AS id FROM tl_formdata_details fdd "
 						 . "JOIN tl_formdata fd ON fd.id = fdd.pid "
 						 . "JOIN tl_form f ON f.title = fd.form "
-						 . "WHERE f.id = ? AND fdd.ff_name = ?";
+						 . "WHERE f.id = ? AND fdd.ff_name = ? "
+						 . "ORDER BY LENGTH(fdd.value) DESC, fdd.value DESC";
 						 
 			$lastId = $this->Database->prepare($queryString)
+							->limit(1)
 							->execute(array($arrForm['id'], $autoIdFieldName));
 			
 			if ($lastId->numRows > 0 && $lastId->next() && strlen($lastId->id) > 0) {
@@ -84,6 +86,11 @@ class EfgFormFieldAutoId extends Backend
 				
 				// increment value
 				$autoId = intval($autoId) + 1;
+			}
+			
+			// if th last id is smaller than the start value something was manipulated in the db
+			if ($autoId < $arrForm['autoIdStartValue']) {
+				$autoId = $arrForm['autoIdStartValue'];
 			}
 				
 			// add digit grouping

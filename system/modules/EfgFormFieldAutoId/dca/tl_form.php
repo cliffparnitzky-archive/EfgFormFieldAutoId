@@ -53,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_form']['fields']['autoIdStartValue'] = array
 	'exclude'                 => true,
 	'filter'                  => false,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'rgxp'=>'digit', 'maxlength'=>9)
+	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'rgxp'=>'digit', 'maxlength'=>10)
 );
 
 // Palettes

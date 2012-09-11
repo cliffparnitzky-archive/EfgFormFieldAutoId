@@ -30,7 +30,7 @@
 // fields
 $GLOBALS['TL_LANG']['tl_form']['autoIdActive']     = array('Automatische Id erzeugen', 'Wenn Sie diese Option wählen, wird beim Speichern der Daten (im Backend-Modul "Formular-Daten") automatisch eine Id für jeden Datensatz erzeugt.');
 $GLOBALS['TL_LANG']['tl_form']['autoIdField']      = array('Auto Id Feld', 'Wählen Sie das Feld des Formulars aus, welches für die Speicherung der Auto Id verwendet werden soll.');
-$GLOBALS['TL_LANG']['tl_form']['autoIdStartValue'] = array('Startwert', 'Wählen Sie ein Wert, der für die automatische Id des ersten Datensatzes verwendet werden soll.');
+$GLOBALS['TL_LANG']['tl_form']['autoIdStartValue'] = array('Startwert', 'Wählen Sie ein Wert, der für die automatische Id des ersten Datensatzes verwendet werden soll. Das größte mögliche Wert für einen Auto Id ist 2.147.483.648 (2<sup>31</sup>).');
 
 // legends
 $GLOBALS['TL_LANG']['tl_form']['autoid_legend'] = "(EFG) Automatische Id Erzeugung";
