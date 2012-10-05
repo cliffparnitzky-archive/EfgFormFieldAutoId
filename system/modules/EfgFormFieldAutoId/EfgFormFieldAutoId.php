@@ -39,7 +39,7 @@ class EfgFormFieldAutoId extends Backend
 	/**
 	 * Execute hook 'processEfgFormData' to generate the automatic id before storing the record.
 	 */
-	public function generateAutoId($arrToSave, $arrFiles, $intOldId, $arrForm, $arrLabels)
+	public function generateAutoId($arrToSave, $arrFiles, $intOldId, $arrForm, $arrLabels=null)
 	{
 		if ($arrForm['autoIdActive'] && $intOldId == 0) {
 			$autoIdFieldName = $arrForm['autoIdField'];
