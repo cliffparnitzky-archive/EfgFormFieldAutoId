@@ -43,7 +43,6 @@ class EfgFormFieldAutoId extends Backend
 	{
 		if ($arrForm['autoIdActive'] && $intOldId == 0) {
 			$autoIdFieldName = $arrForm['autoIdField'];
-			$autoId = $arrForm['autoIdStartValue'];
 			
 			$digitGrouping = false;
 			$thousandsSeparator = '';
@@ -52,14 +51,13 @@ class EfgFormFieldAutoId extends Backend
 						->limit(1)
 						->execute(array($arrForm['id'], $autoIdFieldName, 'autoId'));
 		
-			if ($objField->numRows > 0 && $objField->next()) {
-				$digitGrouping = strlen($objField->autoIdDigitGrouping) > 0;
-				$thousandsSeparator = $GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR'][$objField->autoIdThousandsSeparator];
-				$prefix = $objField->autoIdPrefix;
-				
-				if (strlen($objField->autoIdPrefixAddBlank) > 0) {
-					$prefix .= " ";
-				}
+			$autoId = $objField->autoIdStartValue;
+			$digitGrouping = strlen($objField->autoIdDigitGrouping) > 0;
+			$thousandsSeparator = $GLOBALS['TL_AUTO_ID']['THOUSANDS_SEPARATOR'][$objField->autoIdThousandsSeparator];
+			$prefix = $objField->autoIdPrefix;
+			
+			if (strlen($objField->autoIdPrefixAddBlank) > 0) {
+				$prefix .= " ";
 			}
 			
 			$queryString = "SELECT fdd.value AS id FROM tl_formdata_details fdd "
@@ -85,7 +83,7 @@ class EfgFormFieldAutoId extends Backend
 				}
 				
 				// increment value
-				$autoId = intval($autoId) + 1;
+				$autoId = intval($autoId) + $objField->autoIdIncrementValue;
 			}
 			
 			// if th last id is smaller than the start value something was manipulated in the db

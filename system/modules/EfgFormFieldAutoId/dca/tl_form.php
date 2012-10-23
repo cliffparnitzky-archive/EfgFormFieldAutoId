@@ -36,7 +36,6 @@ $GLOBALS['TL_DCA']['tl_form']['fields']['autoIdActive'] = array
 	'inputType'               => 'checkbox',
 	'eval'                    => array('submitOnChange'=>true)
 );
-
 $GLOBALS['TL_DCA']['tl_form']['fields']['autoIdField'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form']['autoIdField'],
@@ -47,15 +46,6 @@ $GLOBALS['TL_DCA']['tl_form']['fields']['autoIdField'] = array
 	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_form']['fields']['autoIdStartValue'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_form']['autoIdStartValue'],
-	'exclude'                 => true,
-	'filter'                  => false,
-	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'rgxp'=>'digit', 'maxlength'=>10)
-);
-
 // Palettes
 $GLOBALS['TL_DCA']['tl_form']['palettes']['__selector__'][] = 'autoIdActive';
 
@@ -63,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_form']['palettes']['default'] =  str_replace(array('{expe
 
 // Subpalettes
 array_insert($GLOBALS['TL_DCA']['tl_form']['subpalettes'], count($GLOBALS['TL_DCA']['tl_form']['subpalettes']),
-	array('autoIdActive' => 'autoIdField, autoIdStartValue')
+	array('autoIdActive' => 'autoIdField')
 );
 
 ?>

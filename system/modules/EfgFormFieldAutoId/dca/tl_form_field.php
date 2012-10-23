@@ -28,13 +28,29 @@
  */
 
 // fields
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdStartValue'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdStartValue'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'rgxp'=>'digit', 'maxlength'=>10)
+);
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdIncrementValue'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdIncrementValue'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50', 'rgxp'=>'digit', 'maxlength'=>10)
+);
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdDigitGrouping'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdDigitGrouping'],
 	'exclude'                 => true,
 	'filter'                  => false,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 m12')
+	'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'clr w50 m12')
 );
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdThousandsSeparator'] = array
 (
@@ -88,7 +104,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefixAddBlank'] = array
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdDigitGrouping';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdShowWhileCreation';
 
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{options_legend},autoIdDigitGrouping,autoIdShowWhileCreation,autoIdPrefix,autoIdPrefixAddBlank;{expert_legend:hide},class';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{options_legend},autoIdStartValue,autoIdIncrementValue,autoIdDigitGrouping,autoIdShowWhileCreation,autoIdPrefix,autoIdPrefixAddBlank;{expert_legend:hide},class';
 
 // Subpalettes
 array_insert($GLOBALS['TL_DCA']['tl_form_field']['subpalettes'], count($GLOBALS['TL_DCA']['tl_form_field']['subpalettes']),

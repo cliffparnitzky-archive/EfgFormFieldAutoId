@@ -12,14 +12,15 @@
 --
 CREATE TABLE `tl_form` (
   `autoIdActive` char(1) NOT NULL default '',
-  `autoIdField` varchar(64) NOT NULL default '',
-  `autoIdStartValue` int(10) unsigned NOT NULL default '0'
+  `autoIdField` varchar(64) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Table `tl_form_field`
 --
 CREATE TABLE `tl_form_field` (
+  `autoIdStartValue` int(10) unsigned NOT NULL default '0',
+  `autoIdIncrementValue` int(10) unsigned NOT NULL default '1',
   `autoIdDigitGrouping` char(1) NOT NULL default '',
   `autoIdThousandsSeparator` varchar(5) NOT NULL default '',
   `autoIdShowWhileCreation` char(1) NOT NULL default '',

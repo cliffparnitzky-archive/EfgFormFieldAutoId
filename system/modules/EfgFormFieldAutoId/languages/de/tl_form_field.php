@@ -33,6 +33,8 @@
 $GLOBALS['TL_LANG']['FFL']['autoId'] = array('Auto Id Feld', 'Ein Feld das automatisch eine Id für jeden Datensatz generiert.');
 
 // fields
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdStartValue']          = array('Startwert', 'Wählen Sie ein Wert, der für die automatische Id des ersten Datensatzes verwendet werden soll. Der größte mögliche Wert für einen Auto Id ist 2.147.483.648 (2<sup>31</sup>). Beim Erreichen dieses Wertes ist keine Ermittlung einer neuen Auto Id mehr möglich.');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdIncrementValue']      = array('Inkrementwert', 'Wählen Sie ein Wert, um den die letzten automatische Id inkrementiert werden soll zur Ermittlung der nächsten automatischen Id. Beachten Sie, dass bei einem entsprechend hohem <i>Startwert</i> und ebenso hohem <i>Inkrementwert</i> nur eine bestimme Anzahl von Auto Ids möglich ist.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdDigitGrouping']       = array('Zifferngruppierung verwenden', 'Wenn Sie diese Option wählen, wird der Auto Id Wert mit Zifferngruppierung gespeichert (z.B. <i>1.000.512</i>).');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']  = array('Tausendertrennzeichen', 'Wählen Sie das Tausendertrennzeichen, welches Zifferngruppierung verwendet werden soll.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdShowWhileCreation']   = array('Beim Anlegen eines Datensatzes anzeigen', 'Wenn Sie diese Option wählen, wird das Auto Id Feld im Formular auch angezeigt, wenn ein Datensatz neu angelegt wird (sonst ist es nur beim Bearbeiten sichtbar).');

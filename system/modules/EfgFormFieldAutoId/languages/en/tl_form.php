@@ -30,7 +30,6 @@
 // fields
 $GLOBALS['TL_LANG']['tl_form']['autoIdActive']     = array('Generate automatic id', 'If you choose this option, each record will get an automatic id when storing the data (in database "Form data").');
 $GLOBALS['TL_LANG']['tl_form']['autoIdField']      = array('Auto id field', 'Select the field of the form, which should be used for storing the automatic id.');
-$GLOBALS['TL_LANG']['tl_form']['autoIdStartValue'] = array('Startvalue', 'Set the value, which should be uses as automatic id for the first record. The largest possible value for an auto id is 2.147.483.648 (2<sup>31</sup>).');
 
 // legends
 $GLOBALS['TL_LANG']['tl_form']['autoid_legend'] = "(EFG) Automatic id generation";

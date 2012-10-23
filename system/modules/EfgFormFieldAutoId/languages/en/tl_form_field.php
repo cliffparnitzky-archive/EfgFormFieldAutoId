@@ -33,6 +33,8 @@
 $GLOBALS['TL_LANG']['FFL']['autoId'] = array('Auto id field', 'A field automatic generatic an id for each record.');
 
 // fields
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdStartValue']          = array('Startvalue', 'Set the value, which should be uses as automatic id for the first record. The largest possible value for an auto id is 2.147.483.648 (2<sup>31</sup>). If this value is reached, a determination of a new auto id is not possible.');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdIncrementValue']      = array('Increment value', 'Set the value, by which the last automatic id should be incremented to determine the next automatic id. Please note if <i>start value</i> and <i>increment value</i> are very high, only a certain number of auto ids is possible.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdDigitGrouping']       = array('Use digit grouping', 'If you choose this option, the auto id value will be stored with digit grouping (e.g. <i>1,000,512</i>).');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']  = array('Thousands separator', 'Select the thousands separator, which should be used for digit grouping.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdShowWhileCreation']   = array('Show while creating a new record', 'If you choose this option, the auto id field will also be displayed, while creating a new record (otherwise it is only visible when editing).');
