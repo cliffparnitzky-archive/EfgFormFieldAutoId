@@ -26,5 +26,6 @@ CREATE TABLE `tl_form_field` (
   `autoIdShowWhileCreation` char(1) NOT NULL default '',
   `autoIdAutoCreationMessage` text NULL,
   `autoIdPrefix` varchar(30) NOT NULL default '',
-  `autoIdPrefixAddBlank` char(1) NOT NULL default ''
+  `autoIdPrefixAddBlank` char(1) NOT NULL default '',
+  `autoIdAdditionalSqlWhere` text NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -99,12 +99,20 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdPrefixAddBlank'] = array
 	'inputType'               => 'checkbox',
 	'eval'                    => array('tl_class'=>'w50 m12',)
 );
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['autoIdAdditionalSqlWhere'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['autoIdAdditionalSqlWhere'],
+	'exclude'                 => true,
+	'filter'                  => false,
+	'inputType'               => 'textarea',
+	'eval'                    => array('tl_class'=>'clr')
+);
 
 // Palettes
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdDigitGrouping';
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['__selector__'][] = 'autoIdShowWhileCreation';
 
-$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{options_legend},autoIdStartValue,autoIdIncrementValue,autoIdDigitGrouping,autoIdShowWhileCreation,autoIdPrefix,autoIdPrefixAddBlank;{expert_legend:hide},class';
+$GLOBALS['TL_DCA']['tl_form_field']['palettes']['autoId'] = '{type_legend},type,name,label;{options_legend},autoIdStartValue,autoIdIncrementValue,autoIdDigitGrouping,autoIdShowWhileCreation,autoIdPrefix,autoIdPrefixAddBlank,autoIdAdditionalSqlWhere;{expert_legend:hide},class';
 
 // Subpalettes
 array_insert($GLOBALS['TL_DCA']['tl_form_field']['subpalettes'], count($GLOBALS['TL_DCA']['tl_form_field']['subpalettes']),

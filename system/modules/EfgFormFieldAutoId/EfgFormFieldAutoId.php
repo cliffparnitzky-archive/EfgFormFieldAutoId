@@ -60,10 +60,16 @@ class EfgFormFieldAutoId extends Backend
 				$prefix .= " ";
 			}
 			
+			$additionalSQLWhere = "";
+			if (strlen($objField->autoIdAdditionalSqlWhere) > 0) {
+				$additionalSQLWhere = "AND " . $objField->autoIdAdditionalSqlWhere;
+				$additionalSQLWhere = str_replace("{{autoid}}", "fdd.value", $additionalSQLWhere);
+			}
+			
 			$queryString = "SELECT fdd.value AS id FROM tl_formdata_details fdd "
 						 . "JOIN tl_formdata fd ON fd.id = fdd.pid "
 						 . "JOIN tl_form f ON f.title = fd.form "
-						 . "WHERE f.id = ? AND fdd.ff_name = ? "
+						 . "WHERE f.id = ? AND fdd.ff_name = ? " . $additionalSQLWhere
 						 . "ORDER BY LENGTH(fdd.value) DESC, fdd.value DESC";
 						 
 			$lastId = $this->Database->prepare($queryString)

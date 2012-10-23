@@ -41,6 +41,7 @@ $GLOBALS['TL_LANG']['tl_form_field']['autoIdShowWhileCreation']   = array('Show 
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdAutoCreationMessage'] = array('Message about auto id creation', 'Set a message, that should be displayed in the auto id field while creating a new record, to inform the user about automatic id creation.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefix']              = array('Prefix for auto id value', 'Set a text, which should be precended to the auto id value before storing.');
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdPrefixAddBlank']      = array('Insert blank after prefix', 'If you choose this option, a blank will be inserted between prefix and auto id value (only if a prefix is set).');
+$GLOBALS['TL_LANG']['tl_form_field']['autoIdAdditionalSqlWhere']  = array('Additional SQL WHERE statements', 'Specify additional SQL WHERE statements. Using this option is only recommended with very good SQL knowledge.<br/>In some systems there are already ids for existing records that must be retained. In order e.g. to make sure that only numbers are used to determine the next automatic id (no values such as <i>Cust.No. 4711</i>), these could be excluded using <code>{{autoid}} REGEXP \'^[0-9]\'</code>.<br/>A combination of statements is possible using <code>AND</code> and <code>OR</code>. The placeholder <code>{{autoid}}</code> will be replaced with the automatic id field value column name.');
 
 // options
 $GLOBALS['TL_LANG']['tl_form_field']['autoIdThousandsSeparator']['point'] = 'Poiut (.)';
