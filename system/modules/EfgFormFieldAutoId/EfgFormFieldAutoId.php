@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>. 
  *
  * PHP version 5
- * @copyright  Cliff Parnitzky 2012
+ * @copyright  Cliff Parnitzky 2012-2013
  * @author     Cliff Parnitzky
  * @package    EfgFormFieldAutoId
  * @license    LGPL
@@ -30,17 +30,15 @@
 /**
  * Class EfgFormFieldAutoId
  *
- * @copyright  Cliff Parnitzky 2012
+ * @copyright  Cliff Parnitzky 2012-2013
  * @author     Cliff Parnitzky
  * @package    Controller
  */
-class EfgFormFieldAutoId extends Backend
-{
+class EfgFormFieldAutoId extends Backend {
 	/**
 	 * Execute hook 'processEfgFormData' to generate the automatic id before storing the record.
 	 */
-	public function generateAutoId($arrToSave, $arrFiles, $intOldId, $arrForm, $arrLabels=null)
-	{
+	public function generateAutoId($arrToSave, $arrFiles, $intOldId, $arrForm, $arrLabels=null) {
 		if ($arrForm['autoIdActive'] && $intOldId == 0) {
 			$autoIdFieldName = $arrForm['autoIdField'];
 			
@@ -127,8 +125,7 @@ class EfgFormFieldAutoId extends Backend
 	/**
 	 * Execute hook 'validateFormField' to generate the field.
 	 */
-	public function loadAutoIdField(Widget $objWidget, $strForm, $arrForm)
-	{
+	public function loadAutoIdField(Widget $objWidget, $strForm, $arrForm) {
 		$this->import("Input");
 		
 		$isEditMode = strlen($this->Input->get("details")) > 0;
@@ -144,23 +141,28 @@ class EfgFormFieldAutoId extends Backend
 	 * Return all possible 'autoId' form fields as array
 	 * @return array
 	 */
-	public function getAutoIdFields()
-	{
+	public function getAutoIdFields() {
 		$fields = array();
 
 		// Get all 'autoId' form fields which can be used to store the generated id
-		$objFields = $this->Database->prepare("SELECT name,label FROM tl_form_field WHERE type = ? AND pid=? ORDER BY name ASC")
+		$obFormFields = $this->Database->prepare("SELECT * FROM tl_form_field WHERE type = ? AND pid=? ORDER BY label, name ASC")
 							->execute(array('autoId', $this->Input->get('id')));
 
-		while ($objFields->next())
-		{
-			$name = $objFields->name;
-			$label = $objFields->label;
+		while ($obFormFields->next()) {
+			$strClass = $GLOBALS['TL_FFL'][$obFormFields->type];
 
-			if (strlen($name)) {
-				$label = strlen($label) ? $label.' ['.$name.']' : $name;
-				$fields[$name] = $label;
+			// Continue if the class is not defined
+			if (!$this->classFileExists($strClass)) {
+				continue;
 			}
+			
+			// Continue if the class is not an input submit
+			$widget = new $strClass;
+			if (!$widget->submitInput() && !$widget instanceof FormFileUpload) {
+				continue;
+			}
+			
+			$fields[$obFormFields->name] = ((strlen($obFormFields->label) > 0) ? $obFormFields->label . " [" . $GLOBALS['TL_LANG']['tl_form_field']['name'][0] . ": " . $obFormFields->name . " / " : $obFormFields->name . " [") . $GLOBALS['TL_LANG']['tl_form_field']['type'][0] . ": " . $GLOBALS['TL_LANG']['FFL'][$obFormFields->type][0] . "]";
 		}
 
 		return $fields;
