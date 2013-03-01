@@ -1,5 +1,5 @@
-Contao EFG Form Field AutoId Extension
-======================================
+Contao Extension: EfgFormFieldAutoId
+====================================
 
 Adds an auto id field to the form generator.
 
@@ -20,7 +20,7 @@ Compatibility
 -------------
 
 - min. version: Contao 2.9.5
-- max. version: Contao 2.11.6
+- max. version: Contao 2.11.x
 
 
 Dependency
